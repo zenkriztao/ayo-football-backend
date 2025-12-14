@@ -1,14 +1,19 @@
 {
   "info": {
     "name": "AYO Football API",
-    "description": "API Collection untuk Sistem Manajemen Tim Sepakbola Perusahaan XYZ.\n\nFitur:\n1. Pengelolaan Tim Sepakbola\n2. Pengelolaan Pemain (dengan validasi nomor punggung unik per tim)\n3. Pengelolaan Jadwal Pertandingan\n4. Pencatatan Hasil Pertandingan\n5. Laporan/Report\n\nTech Stack: Golang + GIN Framework + PostgreSQL + JWT Authentication",
+    "description": "API Collection untuk Sistem Manajemen Tim Sepakbola AYO Indonesia.\n\n## Live API\nProduction: https://ayo-football-api-production.up.railway.app\n\n## Fitur:\n1. Pengelolaan Tim Sepakbola\n2. Pengelolaan Pemain (dengan validasi nomor punggung unik per tim)\n3. Pengelolaan Jadwal Pertandingan\n4. Pencatatan Hasil Pertandingan\n5. Laporan/Report\n\n## Tech Stack\nGolang + GIN Framework + PostgreSQL + JWT Authentication\n\n## Cara Penggunaan:\n1. Pilih environment (Production atau Local)\n2. Jalankan request 'Login (Admin)' untuk mendapatkan token\n3. Token akan otomatis disimpan\n4. Gunakan endpoint lainnya\n\n## Default Admin:\nEmail: admin@ayofootball.com\nPassword: Admin@123",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
     {
       "key": "base_url",
-      "value": "http://localhost:8080/api/v1",
-      "description": "Base URL for API v1"
+      "value": "https://ayo-football-api-production.up.railway.app/api/v1",
+      "description": "Base URL for API v1 (Production). Change to http://localhost:8080/api/v1 for local development"
+    },
+    {
+      "key": "host_url",
+      "value": "https://ayo-football-api-production.up.railway.app",
+      "description": "Host URL without /api/v1"
     },
     {
       "key": "token",
@@ -41,13 +46,11 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "http://localhost:8080/health",
-              "protocol": "http",
-              "host": ["localhost"],
-              "port": "8080",
+              "raw": "{{host_url}}/health",
+              "host": ["{{host_url}}"],
               "path": ["health"]
             },
-            "description": "Cek status kesehatan API"
+            "description": "Cek status kesehatan API.\n\nResponse:\n{\n  \"status\": \"healthy\",\n  \"service\": \"ayo-football-api\"\n}"
           },
           "response": []
         }
