@@ -2,6 +2,33 @@
 
 A RESTful API for managing football teams, players, matches, and generating reports. Built with Go (Golang) using the Gin framework, following **Clean Architecture** and **SOLID principles**.
 
+## Live API
+
+**Production URL:** https://ayo-football-api-production.up.railway.app
+
+| Endpoint | URL |
+|----------|-----|
+| Base URL | `https://ayo-football-api-production.up.railway.app` |
+| API v1 | `https://ayo-football-api-production.up.railway.app/api/v1` |
+| Health Check | `https://ayo-football-api-production.up.railway.app/health` |
+
+### Quick Test
+```bash
+# Health Check
+curl https://ayo-football-api-production.up.railway.app/health
+
+# Login
+curl -X POST https://ayo-football-api-production.up.railway.app/api/v1/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"admin@ayofootball.com","password":"Admin@123"}'
+```
+
+### Default Admin Credentials
+```
+Email: admin@ayofootball.com
+Password: Admin@123
+```
+
 ## Features
 
 - **Team Management**: CRUD operations for football teams
@@ -14,13 +41,14 @@ A RESTful API for managing football teams, players, matches, and generating repo
 
 ## Technology Stack
 
-- **Language**: Go 1.21+
+- **Language**: Go 1.23+
 - **Framework**: Gin Web Framework
 - **Database**: PostgreSQL (with MySQL support)
 - **ORM**: GORM
 - **Authentication**: JWT (JSON Web Token)
 - **Architecture**: Clean Architecture / Hexagonal Architecture
 - **Containerization**: Docker & Docker Compose
+- **Deployment**: Railway.app
 
 ## Project Structure
 
@@ -78,7 +106,7 @@ ayo-football-backend/
 
 ### Prerequisites
 
-- Go 1.21 or higher
+- Go 1.23 or higher
 - PostgreSQL 13+ or MySQL 8+
 - Docker & Docker Compose (optional)
 
@@ -86,7 +114,7 @@ ayo-football-backend/
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/zenkriztao/ayo-football-backend.git
+   git clone https://github.com/Ayo-Indonesia-sport/ayo-football-backend.git
    cd ayo-football-backend
    ```
 
@@ -262,10 +290,28 @@ go tool cover -html=coverage.out
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
+## Deployment
+
+This API is deployed on **Railway.app** with:
+- Automatic deployment from GitHub
+- PostgreSQL database
+- Free tier hosting
+
+### Deploy Your Own
+1. Fork this repository
+2. Create account at [Railway.app](https://railway.app)
+3. Create new project → Deploy from GitHub
+4. Add PostgreSQL database
+5. Set environment variables (see `.env.example`)
+6. Deploy!
+
 ## License
 
 This project is licensed under the MIT License.
 
 ## Author
 
-Developed for zenkriztao
+Developed by **AYO Indonesia Sport**
+
+- GitHub: [@Ayo-Indonesia-sport](https://github.com/Ayo-Indonesia-sport)
+- API: https://ayo-football-api-production.up.railway.app
