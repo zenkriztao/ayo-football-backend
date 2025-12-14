@@ -1,3 +1,6 @@
+<img width="611" height="269" alt="logo" src="https://github.com/user-attachments/assets/f9868e65-8e62-479a-8edd-2c2b77fa1a61" />
+
+
 # AYO Football Backend API
 
 A RESTful API for managing football teams, players, matches, and generating reports. Built with Go (Golang) using the Gin framework, following **Clean Architecture** and **SOLID principles**.
