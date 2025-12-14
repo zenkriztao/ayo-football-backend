@@ -51,9 +51,15 @@ func Load() (*Config, error) {
 
 	jwtExpHours, _ := strconv.Atoi(getEnv("JWT_EXPIRATION_HOURS", "24"))
 
+	// Railway uses PORT, fallback to SERVER_PORT
+	port := getEnv("PORT", "")
+	if port == "" {
+		port = getEnv("SERVER_PORT", "8080")
+	}
+
 	return &Config{
 		Server: ServerConfig{
-			Port: getEnv("SERVER_PORT", "8080"),
+			Port: port,
 			Mode: getEnv("GIN_MODE", "debug"),
 		},
 		Database: DatabaseConfig{

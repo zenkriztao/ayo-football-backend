@@ -3,6 +3,7 @@ package database
 import (
 	"fmt"
 	"log"
+	"os"
 
 	"github.com/zenkriztao/ayo-football-backend/internal/config"
 	"github.com/zenkriztao/ayo-football-backend/internal/domain/entity"
@@ -18,27 +19,31 @@ func NewDatabase(cfg *config.Config) (*gorm.DB, error) {
 
 	switch cfg.Database.Driver {
 	case "postgres":
-		var dsn string
-		if cfg.Database.Password == "" {
-			dsn = fmt.Sprintf(
-				"postgres://%s@%s:%s/%s?sslmode=%s",
-				cfg.Database.User,
-				cfg.Database.Host,
-				cfg.Database.Port,
-				cfg.Database.Name,
-				cfg.Database.SSLMode,
-			)
-		} else {
-			dsn = fmt.Sprintf(
-				"postgres://%s:%s@%s:%s/%s?sslmode=%s",
-				cfg.Database.User,
-				cfg.Database.Password,
-				cfg.Database.Host,
-				cfg.Database.Port,
-				cfg.Database.Name,
-				cfg.Database.SSLMode,
-			)
+		// Check for DATABASE_URL first (Railway provides this)
+		dsn := os.Getenv("DATABASE_URL")
+		if dsn == "" {
+			if cfg.Database.Password == "" {
+				dsn = fmt.Sprintf(
+					"postgres://%s@%s:%s/%s?sslmode=%s",
+					cfg.Database.User,
+					cfg.Database.Host,
+					cfg.Database.Port,
+					cfg.Database.Name,
+					cfg.Database.SSLMode,
+				)
+			} else {
+				dsn = fmt.Sprintf(
+					"postgres://%s:%s@%s:%s/%s?sslmode=%s",
+					cfg.Database.User,
+					cfg.Database.Password,
+					cfg.Database.Host,
+					cfg.Database.Port,
+					cfg.Database.Name,
+					cfg.Database.SSLMode,
+				)
+			}
 		}
+		log.Printf("Connecting to database...")
 		dialector = postgres.Open(dsn)
 	case "mysql":
 		dsn := fmt.Sprintf(
